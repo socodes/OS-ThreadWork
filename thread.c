@@ -1,28 +1,69 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<pthread.h>
-#include<unistd.h>
+#include <pthread.h>
+#include <stdio.h>
 
-int *routine(){
-    printf("Start from thread\n");
-    sleep(1);
-    printf("Ending thread\n");
-    return 1;
+//whole vector will be of size NUMTHREADS*VECLEN
+#define NUMTHREADS 40
+#define VECLEN 100
+
+pthread_mutex_t myMutex;
+int *a;
+
+void* doDotProduct(void* p)
+{
+	int offset = (int) p, i,
+		start = offset * VECLEN, end = offset * VECLEN + VECLEN;
+
+
+
+	double locSum = 0.0;
+	for (i = start; i < end; i++)
+		locSum += a[i];//no mutual exclusion needed (read-only)
+	
+
+
 }
-int main(){
-    int number,i,res;
-    printf("How many threads you want: ");
-    scanf("%d",&number);
-    pthread_t t[number];
-    for(i=0;i<number;i++){
-        if(pthread_create(&t[i],NULL,&routine,NULL) != 0){
-            printf("Error while creating threads\n");
-        }
 
+int main(int argc, char* argv[])
+{
+    int m;
+    FILE *finput;
+    finput = fopen("input.txt", "r"); //open file for reading.
+    if (finput == NULL) // give error if an error occured while file opening.
+    {
+        printf("Sorry.. An error occured while opening the input file");
+        return 0;
     }
-    for(i=0;i<number;i++){
-        pthread_join(t[i],&res);
-        printf("Number: %d\n",res);
+    fscanf(finput, "%d", &m);
+    printf("\nArray size(m):%d\n",m);
+
+    int i,j;
+    int arr[m][m];
+
+    for (i = 0; i < m; i++)
+    {
+        for(j = 0; j < m; j++){
+            fscanf(finput, "%d ", &arr[i][j]); //import numbers.
+        }
+        fscanf(finput, "\n");
+        
     }
-    return 0;
+    printf("\nMain array: \n");
+    for(i=0;i<m;i++){
+        printArray(arr[i],m);
+    }
+    
+	pthread_t threads[NUMTHREADS];
+
+	a = (int*) malloc(m*m * sizeof(int));
+
+
+	for (i = 0; i < NUMTHREADS; i++)
+		pthread_create(&threads[i], NULL, doDotProduct, (int) i);
+	
+	for (i = 0; i < NUMTHREADS; i++)
+		pthread_join(threads[i], NULL);
+
+
+
+	return 0;
 }

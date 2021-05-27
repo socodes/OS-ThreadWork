@@ -5,16 +5,21 @@
 #include<unistd.h>
 //function declerations 
 void printArray(int [], int );
+int **arr,m;
+int *routine(void **received_arr){
+    int **arr = (int *)received_arr;
+    int i;
+    int **temp = arr;
 
-int *routine(){
-    printf("Start from thread\n");
-    sleep(1);
-    printf("Ending thread\n");
-    return 1;
+    printf("\n");
+    printf("m:%d\n",m);
+    for(i=0;i<4;i++){
+        printArray(temp[i],4);
+    }
 }
 int main(){
 
-    int d,s,m;
+    int d,s;
     printf("Enter number of threads(d): ");
     scanf("%d",&d);
     printf("Enter shift number(s): ");
@@ -31,7 +36,10 @@ int main(){
     printf("\nArray size(m):%d\n",m);
 
     int i,j;
-    int arr[m][m];
+    arr =(int*) malloc(m*m*sizeof(int));
+    for(i=0;i<m;i++){
+        arr[i] = (int*) malloc(m*sizeof(int));
+    }
 
     for (i = 0; i < m; i++)
     {
@@ -40,18 +48,17 @@ int main(){
         }
         fscanf(finput, "\n");
         
-    } 
+    }/*
     printf("\nMain array: \n");
     for(i=0;i<m;i++){
         printArray(arr[i],m);
-    }
+    }*/
     printf("\n\n");
     pthread_t t[d];
     for(i=0;i<d;i++){
-        if(pthread_create(&t[i],NULL,&routine,NULL) != 0){
+        if(pthread_create(&t[i],NULL,&routine,(void**)arr) != 0){
             printf("Error while creating threads\n");
         }
-
     }
     for(i=0;i<d;i++){
         pthread_join(t[i],NULL);
