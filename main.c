@@ -27,7 +27,7 @@ int main(){
     scanf("%d",&s); */
 
     FILE *finput;
-    finput = fopen("input2.txt", "r"); //open file for reading.
+    finput = fopen("input.txt", "r"); //open file for reading.
     if (finput == NULL) // give error if an error occured while file opening.
     {
         printf("Sorry.. An error occured while opening the input file");
@@ -37,21 +37,17 @@ int main(){
     printf("m:%d\n",m);
 
     int i,j;
-    int **arr = (int*) malloc(m * sizeof(int));
-    for(i=0;i<m;i++){
-        arr[i]=(int*) malloc(m * sizeof(int)); //dynamic array that builds every row for survey
-    }
+    int arr[m][m];
 
     for (i = 0; i < m; i++)
     {
         for(j = 0; j < m; j++){
             fscanf(finput, "%d ", &arr[i][j]); //import numbers.
         }
-        
-        //fscanf(finput, "\n");
+        fscanf(finput, "\n");
         printArray(arr[i],m);
     }
-    print2dArray(arr,m,m);
+    //print2dArray(arr,m,m);
     fclose(finput);
     return 0;
 }
