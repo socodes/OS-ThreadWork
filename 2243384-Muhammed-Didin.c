@@ -2,17 +2,17 @@
     2243384 - Muhammed Didin
     May 2021
 
-    In order to run;
-    gcc -o [OutputFileName] [FileName] -lpthread
+    -In order to run;
+    -gcc -o [OutputFileName] [FileName] -lpthread
     
-    For example;
-    gcc -o main  2243384-Muhammed-Didin.c -lpthread -w
+    -For example;
+    -gcc -o main  2243384-Muhammed-Didin.c -lpthread -w
 
-    We have a simple menu that leads us. But it works only 1 time. You need to run everytime.
+    -We have a simple menu that leads us. But it works only 1 time. You need to run everytime.
 
 
-    For Part 1;
-    Input file exactly be names as "input.txt"
+    -For Part 1;
+    -Input file exactly be names as "input.txt"
     and its context should exactly be like:
 
     4
@@ -23,6 +23,8 @@
 
     -4 is the number of rows and columns.
     -Each line represents a row in matrix.
+
+    -In case of any problem, I can make an interview and explain how the program works.
 
 */
 
@@ -57,11 +59,12 @@ int forky;
 void *routine(void *id){
     int myid = (int) id;
     int i=0;
-    while (i != 5) {	
-        //THINK..
+    while (i != 50) {	
+        
         if(forky==1){
             printf("Only 1 fork in the box left\n");
         }
+        //THINK..
         pickup(myid);
         
 
