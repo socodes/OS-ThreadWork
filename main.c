@@ -34,7 +34,6 @@ int main(){
     scanf("%d",&selection);
     printf("Select: %d\n",selection);
     if(selection == 1){
-
         printf("Enter number of threads(d): ");
         scanf("%d",&d);
         printf("Enter shift number(s): ");
@@ -103,6 +102,9 @@ int main(){
         for(i=0;i<m;i++){
             printArray(arr[i],m);
         }
+    }
+    else{
+
     }
     return 0;
 }
