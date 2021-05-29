@@ -8,8 +8,6 @@
     -For example;
     -gcc -o main  2243384-Muhammed-Didin.c -lpthread -w
 
-    -We have a simple menu that leads us. But it works only 1 time. You need to run everytime.
-
 
     -For Part 1;
     -Input file exactly be names as "input.txt"
@@ -23,8 +21,6 @@
 
     -4 is the number of rows and columns.
     -Each line represents a row in matrix.
-
-    -In case of any problem, I can make an interview and explain how the program works.
 
 */
 
